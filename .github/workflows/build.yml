@@ -1,0 +1,141 @@
+name: Build and publish release
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Existing version tag (for example v0.2.2); leave blank to release the selected branch version'
+        required: false
+        type: string
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-${{ github.event.inputs.tag || github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  metadata:
+    runs-on: ubuntu-24.04
+    outputs:
+      tag: ${{ steps.version.outputs.tag }}
+      sha: ${{ steps.version.outputs.sha }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.inputs.tag || github.ref }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+      - name: Validate tag and resolve exact source commit
+        id: version
+        run: node scripts/prepare-release.cjs --metadata
+        env:
+          REQUESTED_TAG: ${{ github.event.inputs.tag }}
+          EVENT_TAG: ${{ github.ref_type == 'tag' && github.ref_name || '' }}
+
+  build:
+    needs: metadata
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: windows-2025
+            platform: windows
+            target: win
+            arch: x64
+          - runner: windows-11-arm
+            platform: windows
+            target: win
+            arch: arm64
+          - runner: macos-15-intel
+            platform: macos
+            target: mac
+            arch: x64
+          - runner: macos-15
+            platform: macos
+            target: mac
+            arch: arm64
+          - runner: ubuntu-24.04
+            platform: linux
+            target: linux
+            arch: x64
+          - runner: ubuntu-24.04-arm
+            platform: linux
+            target: linux
+            arch: arm64
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ needs.metadata.outputs.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+      - name: Install pinned pnpm
+        run: npm install --global pnpm@11.25.0
+      - name: Install dependencies and Electron binary
+        run: pnpm install --frozen-lockfile
+      - name: Run unit tests
+        run: pnpm test
+      - name: Install native Linux packaging tools
+        if: matrix.platform == 'linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes ruby ruby-dev build-essential
+          sudo gem install fpm --version 1.16.0 --no-document
+      - name: Build native platform and architecture
+        run: node node_modules/electron-builder/cli.js --${{ matrix.target }} --${{ matrix.arch }} --publish never
+        env:
+          CSC_IDENTITY_AUTO_DISCOVERY: 'false'
+          USE_SYSTEM_FPM: ${{ matrix.platform == 'linux' && 'true' || 'false' }}
+      - name: Verify expected installers exist
+        run: node scripts/prepare-release.cjs --verify-build ${{ matrix.platform }} ${{ matrix.arch }}
+      - uses: actions/upload-artifact@v6
+        with:
+          name: installers-${{ matrix.platform }}-${{ matrix.arch }}
+          path: |
+            release/*.exe
+            release/*.dmg
+            release/*.zip
+            release/*.AppImage
+            release/*.deb
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 14
+
+  release:
+    needs: [metadata, build]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ needs.metadata.outputs.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+      - uses: actions/download-artifact@v7
+        with:
+          pattern: installers-*
+          path: release-assets
+          merge-multiple: true
+      - name: Validate all twelve packages, package source and frames, and calculate checksums
+        run: node scripts/prepare-release.cjs --binaries release-assets --output release-assets
+      - name: Publish complete GitHub Release
+        run: node scripts/prepare-release.cjs --publish release-assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_TAG: ${{ needs.metadata.outputs.tag }}
+          RELEASE_SHA: ${{ needs.metadata.outputs.sha }}

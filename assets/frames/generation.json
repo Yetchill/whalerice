@@ -1,0 +1,52 @@
+{
+  "method": "Codex built-in imagegen, one individually generated transparent PNG per frame",
+  "version": "0.2.1",
+  "expression": "Consistent normal eyes; only close both eyes and open mouth at bite, then close mouth with one rice grain on cheek.",
+  "reused": {
+    "eat-01.png": "idle-full.png"
+  },
+  "frames": [
+    {
+      "file": "idle-full.png",
+      "prompt": "Use case: identity-preserve. Input image 1 is the exact full-body transparent animation frame to edit. Input image 2 is original approved character face identity reference. EDIT ONLY THE FACIAL EXPRESSION of image 1: restore a normal gentle adorable expression like image 2, BOTH blue eyes equally naturally wide and facing straight forward, centered pupils, normal relaxed symmetric eyebrows, a small simple closed-mouth smile. No side-eye, no half-lidded smug look, no crooked smirk, no wink, no puffy exaggerated cheeks. Keep the character size, head size, head angle, eye outline size, hair, ahoge, clothing, hands, spoon, bowl, full white rice, feet, tail, lighting and outlines EXACTLY as image 1. Do not redesign anything besides the eyes, eyebrows and mouth. One complete character alone in one square transparent PNG, same canvas framing and transparent margins, not a grid or sprite sheet. No text. This is the NORMAL resting animation frame; every following frame will match these eyes."
+    },
+    {
+      "file": "eat-05.png",
+      "prompt": "Use case: identity-preserve. Image 1 is the edit target: one full-body transparent animation frame after eating. Image 2 is the NORMAL eye and face reference. Edit only the face of image 1 to exactly match image 2's normal friendly front-facing blue eyes, eye opening, centered pupils and relaxed eyebrows. Mouth is simply closed with a small soft natural smile; cheeks are normal shape, NOT puffed, no squiggle chewing mouth. Keep exactly ONE small slender grain of cooked white rice stuck on her cheek beside the mouth. No half-lidded gaze, no side-eye, no wink, no smug or sneaky expression. Keep image1's spoon empty and hand position, bowl full of rice, head shape, hair, maid clothes, tail, feet, lighting, canvas dimensions, outline and transparent framing absolutely unchanged. A single complete transparent PNG, not a grid. This should look almost the same as the normal resting expression in image2, with the only facial difference being the one rice grain."
+    },
+    {
+      "file": "eat-02.png",
+      "prompt": "Use case: identity-preserve. Image1 is the target full-body transparent PNG animation pose; image2 is the exact normal face reference. EDIT ONLY THE FACE of image1: copy image2's symmetric, normally open front-facing blue eyes with identical pupil placement, highlights, eye size and relaxed eyebrows. Keep the mouth a tiny normal closed smile. Do not shift gaze, squint, raise brows or make her sly. No side-eye, smirk, wink or puffed cheeks. Preserve image1's specific hand and spoon position exactly, including whether rice is on spoon, and preserve bowl, rice, hair, head position, outline, tail, feet, clothes, light, transparent canvas and character framing exactly. Return one complete independent transparent PNG, not a sheet; no text. The expression must look identical to the normal resting face in image2."
+    },
+    {
+      "file": "eat-02b.png",
+      "prompt": "Use case: identity-preserve. Image1 is the target full-body transparent PNG animation pose; image2 is the exact normal face reference. EDIT ONLY THE FACE of image1: copy image2's symmetric, normally open front-facing blue eyes with identical pupil placement, highlights, eye size and relaxed eyebrows. Keep the mouth a tiny normal closed smile. Do not shift gaze, squint, raise brows or make her sly. No side-eye, smirk, wink or puffed cheeks. Preserve image1's specific hand and spoon position exactly, including whether rice is on spoon, and preserve bowl, rice, hair, head position, outline, tail, feet, clothes, light, transparent canvas and character framing exactly. Return one complete independent transparent PNG, not a sheet; no text. The expression must look identical to the normal resting face in image2."
+    },
+    {
+      "file": "eat-03.png",
+      "prompt": "Use case: identity-preserve. Image1 is the edit target full-body transparent PNG with its spoon approaching the lips; image2 is the exact normal face reference. Change ONLY image1's facial expression: match image2's normally open round blue eyes, same centered pupils and highlights, same relaxed eyebrows, identical small closed-mouth gentle smile. Keep her mouth CLOSED until the following animation frame. No squint, no pupil movement, no half-lidded eyes, no side-eye, no smugness, no wink, no exaggerated cheeks. Preserve image1's exact raised hand and loaded spoon position, spoon size, bowl and rice, head angle and shape, hair, ahoge, tail, outfit, feet, light and transparent outline. Same square transparent canvas and full-body framing. One independent complete PNG frame, no grid or sheet, no text. This facial expression must be identical to the normal resting face in image2."
+    },
+    {
+      "file": "eat-03b.png",
+      "prompt": "Use case: identity-preserve. Image1 is the edit target full-body transparent PNG with its spoon approaching the lips; image2 is the exact normal face reference. Change ONLY image1's facial expression: match image2's normally open round blue eyes, same centered pupils and highlights, same relaxed eyebrows, identical small closed-mouth gentle smile. Keep her mouth CLOSED until the following animation frame. No squint, no pupil movement, no half-lidded eyes, no side-eye, no smugness, no wink, no exaggerated cheeks. Preserve image1's exact raised hand and loaded spoon position, spoon size, bowl and rice, head angle and shape, hair, ahoge, tail, outfit, feet, light and transparent outline. Same square transparent canvas and full-body framing. One independent complete PNG frame, no grid or sheet, no text. This facial expression must be identical to the normal resting face in image2."
+    },
+    {
+      "file": "idle-half.png",
+      "prompt": "Use case: precise-object-edit. Edit the single attached full-body transparent character image. CHANGE ONLY THE AMOUNT OF RICE inside the bowl to HALF of the bowl, below the rim with the white ceramic inner walls clearly visible; no rice piled above rim. Preserve the bowl exterior, whale motif, rim geometry, ceramic size, left hand, right hand, empty metal spoon position, the exact NORMAL friendly face, symmetric open blue eyes and their pupils, small closed smile, eyebrows, head, hair, tail, outfit, feet, shadows, body pose, character framing, exact canvas size and transparency. Do not change facial expression or eye gaze at all. This is one standalone idle animation frame, not a grid or sheet; no text, no backgrounds. For any rice present keep real plump short-grain cooked rice texture."
+    },
+    {
+      "file": "idle-low.png",
+      "prompt": "Use case: precise-object-edit. Edit the single attached full-body transparent character image. CHANGE ONLY THE AMOUNT OF RICE inside the bowl to only a very THIN shallow layer of cooked white rice on the very bottom, with most of the empty inner ceramic bowl visible. Preserve the bowl exterior, whale motif, rim geometry, ceramic size, left hand, right hand, empty metal spoon position, the exact NORMAL friendly face, symmetric open blue eyes and their pupils, small closed smile, eyebrows, head, hair, tail, outfit, feet, shadows, body pose, character framing, exact canvas size and transparency. Do not change facial expression or eye gaze at all. This is one standalone idle animation frame, not a grid or sheet; no text, no backgrounds. For any rice present keep real plump short-grain cooked rice texture."
+    },
+    {
+      "file": "idle-empty.png",
+      "prompt": "Use case: precise-object-edit. Edit the single attached full-body transparent character image. CHANGE ONLY THE AMOUNT OF RICE inside the bowl to ZERO rice, a completely empty clean white ceramic interior visible, with no grain left inside. Preserve the bowl exterior, whale motif, rim geometry, ceramic size, left hand, right hand, empty metal spoon position, the exact NORMAL friendly face, symmetric open blue eyes and their pupils, small closed smile, eyebrows, head, hair, tail, outfit, feet, shadows, body pose, character framing, exact canvas size and transparency. Do not change facial expression or eye gaze at all. This is one standalone idle animation frame, not a grid or sheet; no text, no backgrounds. For any rice present keep real plump short-grain cooked rice texture."
+    },
+    {
+      "file": "eat-04.png",
+      "source": "C:\\Users\\80542\\.codex\\generated_images\\01a0fc4c-3156-7673-9817-b153a737fb56\\exec-640410c5-d1fa-4234-b32c-3c8082ccb0a2.png",
+      "prompt": "Use case: identity-preserve. Edit ONLY the specified facial expression and spoon-holding arm of the attached SINGLE animation frame. Output ONE standalone PNG, NOT a grid or sheet. Keep absolutely identical canvas framing, character scale, hair silhouette, hair strands, tail, ahoge, costume, legs, feet baseline, lighting, bowl, LEFT bowl-holding hand and full rice quantity. All character body/props remain in exactly the same image pixel locations, except right spoon arm can change. Keep transparent background. Do not redraw or restyle the static parts. No text or extra objects. Animation frame: her RIGHT hand holds the loaded metal spoon directly AT HER OPEN MOUTH, eating the bite. Mouth cute and modest open, eyes squeeze shut into joyful curved arcs, slightly lifted cheeks. She leans forward at most a tiny amount without moving body silhouette. Food is touching lips, not floating. Expression is cute enthusiastic chibi 'nom!' with a hint of stealing food, not sinister.",
+      "note": "Reused normal closed-eyes open-mouth eating pose from previous individual generation; no sideways gaze or wink."
+    }
+  ]
+}

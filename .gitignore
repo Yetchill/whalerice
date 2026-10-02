@@ -1,0 +1,11 @@
+node_modules/
+release/
+*.log
+.env
+.env.*
+*.key
+*.pem
+/secure/
+/settings.json
+.DS_Store
+Thumbs.db

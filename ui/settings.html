@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; img-src 'self'; connect-src 'none'">
+  <title>鲸鱼娘的饭碗 · 设置</title>
+  <link rel="stylesheet" href="settings.css">
+</head>
+<body>
+  <main class="settings-shell">
+    <header class="settings-header">
+      <div class="mark" aria-hidden="true">≈</div>
+      <div><h1>饭碗设置</h1><p>鲸鱼娘的桌面小挂件</p></div>
+    </header>
+
+    <form id="config-form">
+      <fieldset id="settings-fields" disabled>
+        <div class="scale-field">
+          <div class="label-row"><label for="ui-scale">挂件大小</label><output id="scale-value" for="ui-scale">100%</output></div>
+          <div class="scale-controls">
+            <button id="scale-down" type="button" class="scale-step" aria-label="缩小 5%">−</button>
+            <input id="ui-scale" type="range" min="0.7" max="1.6" step="0.05" value="1" aria-label="挂件大小" aria-describedby="scale-note">
+            <button id="scale-up" type="button" class="scale-step" aria-label="放大 5%">+</button>
+          </div>
+          <p id="scale-note" class="scale-note" role="status" aria-live="polite">拖动立即生效 · 自动保存</p>
+        </div>
+
+        <div class="key-field">
+          <div class="label-row"><label for="api-key">DeepSeek API Key</label><span id="key-status" class="key-status">未导入</span></div>
+          <div class="key-row">
+            <input id="api-key" type="password" autocomplete="off" spellcheck="false" autocapitalize="off" placeholder="粘贴 sk-…" aria-describedby="key-note">
+            <button id="import-key" type="button" class="import-button">导入文件</button>
+          </div>
+          <p id="key-note" class="key-note">密钥保存在本机，重启后自动恢复。<br>已保存的密钥不会显示在输入框里。</p>
+        </div>
+
+        <button id="save" type="submit" class="save-button">保存设置</button>
+      </fieldset>
+      <p id="feedback" class="feedback" role="status" aria-live="polite"></p>
+    </form>
+  </main>
+  <script src="settings.js"></script>
+</body>
+</html>

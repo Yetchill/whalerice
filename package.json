@@ -1,0 +1,15 @@
+{
+  "name": "whale-rice", "version": "0.2.2", "description": "鲸鱼娘的饭碗 · DeepSeek 余额桌面挂件", "main": "main.cjs", "author": "Whale Rice", "license": "MIT",
+  "packageManager": "pnpm@11.25.0",
+  "scripts": {"start": "electron .", "test": "node --test test/*.test.cjs", "dist": "electron-builder --publish never", "dist:win": "electron-builder --win --publish never", "dist:mac": "electron-builder --mac --publish never", "dist:linux": "electron-builder --linux --publish never"},
+  "devDependencies": {"electron": "44.5.1", "electron-builder": "26.15.3"},
+  "build": {
+    "appId": "com.whalerice.desktop", "productName": "WhaleRice", "directories": {"output": "release"},
+    "files": ["main.cjs", "preload.cjs", "lib/**", "ui/**", "assets/**", "package.json"],
+    "win": {"target": ["portable", "nsis"], "signAndEditExecutable": false},
+    "portable": {"artifactName": "WhaleRice-${version}-windows-${arch}-portable.exe"},
+    "nsis": {"artifactName": "WhaleRice-${version}-windows-${arch}-setup.exe", "oneClick": true, "perMachine": false},
+    "mac": {"target": ["dmg", "zip"], "artifactName": "WhaleRice-${version}-macos-${arch}.${ext}", "category": "public.app-category.utilities"},
+    "linux": {"target": ["AppImage", "deb"], "artifactName": "WhaleRice-${version}-linux-${arch}.${ext}", "category": "Utility", "maintainer": "Whale Rice"}
+  }
+}

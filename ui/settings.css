@@ -1,0 +1,52 @@
+:root {
+  color-scheme: light;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+  color: #294562;
+  background: #f3f8fe;
+  font-synthesis: none;
+}
+* { box-sizing: border-box; }
+body { margin: 0; }
+button, input { font: inherit; }
+button { cursor: pointer; }
+.settings-shell { padding: 18px 26px 10px; max-width: 520px; margin: auto; }
+.settings-header { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+.mark { width: 42px; height: 42px; border-radius: 15px; display: grid; place-items: center; background: #e2efff; color: #438ce3; font-size: 32px; font-weight: 600; line-height: 1; }
+h1 { margin: 0 0 4px; font-size: 19px; font-weight: 650; letter-spacing: .04em; }
+.settings-header p { margin: 0; font-size: 11px; color: #8294aa; }
+fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
+.label-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.label-row label { font-size: 13px; font-weight: 600; }
+#scale-value { min-width: 54px; padding: 3px 8px; text-align: center; border-radius: 6px; background: #e4effd; font-size: 13px; font-variant-numeric: tabular-nums; font-weight: 650; color: #438ce3; }
+.scale-controls { display: grid; grid-template-columns: 32px minmax(0, 1fr) 32px; align-items: center; gap: 12px; margin-top: 12px; }
+.scale-step { width: 32px; height: 32px; padding: 0; border: 1px solid #d6e5f8; border-radius: 9px; color: #5087cc; background: #eaf3ff; font-size: 21px; line-height: 1; }
+.scale-step:hover:not(:disabled) { background: #dcecff; border-color: #b5d1f2; }
+input[type="range"] { display: block; appearance: none; width: 100%; margin: 0; height: 5px; border-radius: 10px; background: linear-gradient(to right, #71a9ec var(--range-fill, 33.33%), #dbe5f1 var(--range-fill, 33.33%)); cursor: pointer; }
+input[type="range"]::-webkit-slider-thumb { appearance: none; width: 17px; height: 17px; border: 3px solid #fff; background: #548fdb; border-radius: 50%; box-shadow: 0 1px 5px #5896dc55; }
+input[type="range"]:focus-visible { outline: 2px solid #91baf0; outline-offset: 6px; }
+.scale-note { margin: 6px 0 0; font-size: 10px; line-height: 1.6; color: #7f97b5; overflow-wrap: anywhere; }
+.scale-note.is-error { color: #b66968; }
+.key-field { margin-top: 18px; }
+.key-status { color: #93a2b5; font-size: 10px; }
+.key-status.is-saved { color: #49839f; }
+.key-status.is-saved::before { content: ""; display: inline-block; width: 5px; height: 5px; margin-right: 5px; vertical-align: 1px; border-radius: 50%; background: #79b8c1; }
+.key-row { display: flex; gap: 8px; margin-top: 10px; }
+input[type="password"] { width: 100%; min-width: 0; border: 1px solid #dce7f4; background: #fff; color: #294562; border-radius: 9px; padding: 0 11px; height: 38px; font-size: 12px; }
+input[type="password"]::placeholder { color: #a0adbe; }
+input[type="password"]:focus { outline: 2px solid #c2dcfa; outline-offset: 1px; border-color: #8bb8ed; }
+.import-button { flex: 0 0 auto; height: 38px; padding: 0 12px; border: 1px solid #d7e6f7; background: #eaf3ff; color: #5485be; border-radius: 9px; font-size: 11px; }
+.import-button:hover { background: #dfedff; }
+.key-note { white-space: pre-line; margin: 10px 0 0; font-size: 10px; line-height: 1.6; color: #91a0b3; }
+.save-button { display: block; width: 100%; height: 40px; border: 0; border-radius: 10px; margin-top: 16px; color: #fff; font-size: 13px; font-weight: 600; letter-spacing: .08em; background: #5a94df; box-shadow: 0 3px 10px #5a94df20; }
+.save-button:hover { background: #4c88d6; }
+.save-button:active { transform: translateY(1px); }
+button:focus-visible { outline: 2px solid #90baf0; outline-offset: 3px; }
+button:disabled, fieldset:disabled button { cursor: default; opacity: .65; }
+.feedback { margin: 9px 0 0; min-height: 17px; font-size: 10px; line-height: 1.6; color: #618aaa; overflow-wrap: anywhere; }
+.feedback.is-error { color: #b66968; }
+@media (max-height: 390px) {
+  .settings-shell { padding-top: 15px; }
+  .settings-header { margin-bottom: 15px; }
+  .key-field { margin-top: 16px; }
+  .save-button { margin-top: 14px; }
+}
