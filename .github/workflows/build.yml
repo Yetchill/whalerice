@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: 'Existing version tag (for example v0.2.2); leave blank to release the selected branch version'
+        description: 'Existing version tag (for example v0.2.3); leave blank to release the selected branch version'
         required: false
         type: string
   push:
@@ -14,7 +14,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: release-${{ github.event.inputs.tag || github.ref }}
+  group: release-${{ github.event.inputs.tag || github.ref_name }}
   cancel-in-progress: false
 
 jobs:
@@ -96,7 +96,7 @@ jobs:
         env:
           CSC_IDENTITY_AUTO_DISCOVERY: 'false'
           USE_SYSTEM_FPM: ${{ matrix.platform == 'linux' && 'true' || 'false' }}
-      - name: Verify expected installers exist
+      - name: Normalize Linux architecture names and verify expected packages
         run: node scripts/prepare-release.cjs --verify-build ${{ matrix.platform }} ${{ matrix.arch }}
       - uses: actions/upload-artifact@v6
         with:

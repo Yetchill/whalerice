@@ -40,6 +40,35 @@ function requireFiles(directory, names) {
   }
 }
 
+function verifyBuild(directory, platform, arch) {
+  const names = installerNames(platform, arch);
+  if (platform === 'linux' && arch === 'x64') {
+    // electron-builder uses target-specific arch spellings for AppImage and DEB.
+    const aliases = [`${prefix}-linux-x86_64.AppImage`, `${prefix}-linux-amd64.deb`];
+    const renames = [];
+    for (let index = 0; index < names.length; index++) {
+      const canonical = path.join(directory, names[index]);
+      const alias = path.join(directory, aliases[index]);
+      const canonicalExists = fs.existsSync(canonical);
+      const aliasExists = fs.existsSync(alias);
+      // Check lstat as well so broken symlinks cannot be mistaken for absent files.
+      const entryExists = file => { try { fs.lstatSync(file); return true; } catch (error) { if (error.code === 'ENOENT') return false; throw error; } };
+      const hasCanonical = canonicalExists || entryExists(canonical);
+      const hasAlias = aliasExists || entryExists(alias);
+      if (hasCanonical && hasAlias) throw new Error(`Conflicting Linux package names; refusing to overwrite ${names[index]}.`);
+      requireFiles(directory, [hasCanonical ? names[index] : aliases[index]]);
+      if (!hasCanonical) renames.push({ from: alias, to: canonical });
+    }
+    // Validate the entire pair before making any changes.
+    for (const rename of renames) {
+      fs.renameSync(rename.from, rename.to);
+      console.log(`Normalized ${path.basename(rename.from)} to ${path.basename(rename.to)}`);
+    }
+  }
+  requireFiles(directory, names);
+  console.log(`Verified ${names.join(', ')}`);
+}
+
 function walk(relative) {
   const absolute = path.join(root, relative);
   const stat = fs.lstatSync(absolute);
@@ -206,9 +235,7 @@ try {
   if (args.includes('--metadata')) metadata();
   else if (args.includes('--verify-build')) {
     const index = args.indexOf('--verify-build');
-    const names = installerNames(args[index + 1], args[index + 2]);
-    requireFiles(path.join(root, 'release'), names);
-    console.log(`Verified ${names.join(', ')}`);
+    verifyBuild(path.join(root, 'release'), args[index + 1], args[index + 2]);
   } else if (args.includes('--publish')) publish(option('--publish'));
   else prepare();
 } catch (error) {

@@ -1,4 +1,4 @@
-# 鲸鱼娘的饭碗 · Whale Rice 0.2.2
+# 鲸鱼娘的饭碗 · Whale Rice 0.2.3
 
 DeepSeek 真实账户余额桌面挂件。Q 版蓝发鲸鱼娘捧着米饭碗、拿着勺子，头顶牌子显示余额。检测到余额下降时，她会舀饭、送到嘴边，入口时闭眼张嘴，吃完闭嘴，脸上留一粒米。其余姿态保持一致的普通眼神与简单表情。
 
@@ -6,7 +6,7 @@ DeepSeek 真实账户余额桌面挂件。Q 版蓝发鲸鱼娘捧着米饭碗、
 
 ## 使用 Windows 便携版
 
-在 [GitHub Releases](https://github.com/yetchill/whalerice/releases) 下载对应平台与 CPU 架构的版本。常见 Windows 电脑使用 `WhaleRice-0.2.2-windows-x64-portable.exe`，直接双击运行；`-setup.exe` 是安装到当前用户目录的安装版。Windows on ARM 使用 arm64 版本。首次启动自动打开设置：粘贴自己的 DeepSeek API Key，或点击“导入文件”选择只包含密钥的 `.txt` / `.key` 文件，然后点击“保存设置”。导入文件后仍需点击保存。
+在 [GitHub Releases](https://github.com/yetchill/whalerice/releases) 下载对应平台与 CPU 架构的版本。常见 Windows 电脑使用 `WhaleRice-0.2.3-windows-x64-portable.exe`，直接双击运行；`-setup.exe` 是安装到当前用户目录的安装版。Windows on ARM 使用 arm64 版本。首次启动自动打开设置：粘贴自己的 DeepSeek API Key，或点击“导入文件”选择只包含密钥的 `.txt` / `.key` 文件，然后点击“保存设置”。导入文件后仍需点击保存。
 
 设置里只有两项：
 
@@ -82,7 +82,7 @@ pnpm dist:linux   # Linux AppImage / DEB
 
 每个 Release 还包括 `WhaleRice-<版本>-source.zip`（源码、全部图片、依赖锁文件和工作流）、`WhaleRice-<版本>-frames.zip`（11 张运行时透明 PNG、完整生成提示词和 `ASSETS.md`），以及 `SHA256SUMS.txt`。源码 ZIP 只收录项目文件，不包含本机用户配置、API Key、依赖缓存或先前的安装包。
 
-发布时先更新 `package.json` 版本，再提交并推送对应 `v<版本>` 标签，例如 `v0.2.2`，工作流会自动运行。也可以在 GitHub Actions 中手动运行 **Build and publish release**：tag 留空时发布所选分支 `package.json` 对应的版本；填写 tag 时构建那个已存在的版本标签。标签必须与源码版本一致，并且不能指向其他提交。手动发布首次版本时由发布任务创建标签，固定到此次实际构建的提交。
+发布时先更新 `package.json` 版本，再提交并推送对应 `v<版本>` 标签，例如 `v0.2.3`，工作流会自动运行。也可以在 GitHub Actions 中手动运行 **Build and publish release**：tag 留空时发布所选分支 `package.json` 对应的版本；填写 tag 时构建那个已存在的版本标签。标签必须与源码版本一致，并且不能指向其他提交。手动发布首次版本时由发布任务创建标签，固定到此次实际构建的提交。
 
 工作流只使用仓库自带的 `GITHUB_TOKEN`；读取和构建任务没有发布权限，仅最后发布任务具有 `contents: write`。不需要个人 token 或第三方中转服务。失败时不会公开一个缺少平台包的新版本，修复后可重新运行工作流。
 
